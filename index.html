@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resize & Compress Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        img {
+            display: block;
+            margin-top: 20px;
+            max-width: 100%;
+        }
+        hr {
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Image Resize & Compress Tool</h1>
+
+    <!-- RESIZE IMAGE SECTION -->
+    <h2>Resize Image</h2>
+    <input type="file" id="resizeInput"><br>
+    <input type="number" id="resizeWidth" placeholder="Width in px">
+    <input type="number" id="resizeHeight" placeholder="Height in px"><br>
+    <button onclick="resizeImage()">Resize Image</button>
+    <img id="resizedImage" alt="Resized Image Will Appear Here">
+
+    <hr>
+
+    <!-- COMPRESS IMAGE SECTION -->
+    <h2>Compress Image</h2>
+    <input type="file" id="compressInput"><br>
+    <input type="number" id="quality" placeholder="Quality (0-1)"><br>
+    <button onclick="compressImage()">Compress Image</button>
+    <img id="compressedImage" alt="Compressed Image Will Appear Here">
+
+    <!-- Include external libraries for resizing and compressing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pica/8.0.0/pica.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js"></script>
+
+    <!-- All JavaScript in one place -->
+    <script>
+        // RESIZE IMAGE FUNCTION
+        function resizeImage() {
+            const file = document.getElementById('resizeInput').files[0];
+            const width = parseInt(document.getElementById('resizeWidth').value);
+            const height = parseInt(document.getElementById('resizeHeight').value);
+
+            if (!file || !width || !height) {
+                alert("Please select a file and enter both width and height.");
+                return;
+            }
+
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+
+                pica().resize(img, canvas)
+                    .then(() => pica().toBlob(canvas, 'image/jpeg', 0.90))
+                    .then(blob => {
+                        document.getElementById('resizedImage').src = URL.createObjectURL(blob);
+                    })
+                    .catch(err => console.error(err));
+            };
+        }
+
+        // COMPRESS IMAGE FUNCTION
+        function compressImage() {
+            const file = document.getElementById('compressInput').files[0];
+            const quality = parseFloat(document.getElementById('quality').value);
+
+            if (!file || isNaN(quality) || quality <= 0 || quality > 1) {
+                alert("Please select a file and enter a quality between 0 and 1.");
+                return;
+            }
+
+            new Compressor(file, {
+                quality: quality,
+                success(result) {
+                    document.getElementById('compressedImage').src = URL.createObjectURL(result);
+                },
+                error(err) {
+                    console.error(err);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
