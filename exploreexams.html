@@ -1,0 +1,182 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Exams | Gulf Medical Exams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg-color: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    nav {
+      background: #fff;
+      padding: 1rem 8%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 1000;
+    }
+
+    .logo { font-weight: 700; font-size: 1.25rem; color: var(--primary); text-decoration: none; }
+
+    .ad-slot {
+      max-width: 1100px; margin: 25px auto;
+      background: #fff; text-align: center; padding: 20px;
+      color: #94a3b8; font-size: 0.75rem; font-weight: 600;
+      border: 2px dashed var(--border); border-radius: 12px;
+    }
+
+    .hero { text-align: center; padding: 60px 20px; background: white; border-bottom: 1px solid var(--border); }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #0f172a; letter-spacing: -1px; }
+
+    .main-content { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+
+    .exam-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 30px;
+      display: flex; flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .exam-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .exam-card h3 { margin: 0 0 10px 0; font-size: 1.3rem; }
+    .exam-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+    .exam-card a { text-decoration: none; color: var(--primary); font-weight: 700; display: flex; align-items: center; }
+
+    /* Navigation Buttons */
+    .nav-btn-container {
+      text-align: center; margin: 60px 0;
+      display: flex; justify-content: center; gap: 12px;
+    }
+
+    .nav-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 24px; background-color: white; color: var(--text-main);
+      border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; font-weight: 600; cursor: pointer; font-size: 0.9rem;
+    }
+
+    .nav-btn.home-btn { background-color: var(--primary); color: white; border: none; }
+    
+    /* Forward button hidden by default */
+    #forward-btn { display: none; }
+
+    @media (max-width: 600px) {
+      .nav-btn-container { display: grid; grid-template-columns: 1fr 1fr; }
+      .home-btn { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav><a href="index.html" class="logo">Gulf Medical Exams</a></nav>
+
+  <div class="ad-slot">ADVERTISEMENT</div>
+
+  <header class="hero">
+    <h1>Explore Mock Exams</h1>
+    <p>All major Gulf medical licenses in one place.</p>
+  </header>
+
+  <main class="main-content">
+    <div class="exam-grid">
+      <div class="exam-card"><h3>DHA</h3><p>Dubai Health Authority licensing.</p><a href="dha.html">Take Mock Exam</a></div>
+      <div class="exam-card"><h3>HAAD-DOH</h3><p>Abu Dhabi Health Authority.</p><a href="haad-doh.html">Take Mock Exam</a></div>
+      <div class="exam-card"><h3>DHP-MOPH</h3><p>Qatar Ministry of Public Health.</p><a href="dhp-moph.html">Take Mock Exam</a></div>
+      <div class="exam-card"><h3>OMSB</h3><p>Oman Medical Specialty Board.</p><a href="omsb.html">Take Mock Exam</a></div>
+      <div class="exam-card"><h3>NHRA</h3><p>Bahrain National Health Regulatory Authority.</p><a href="nhra.html">Take Mock Exam</a></div>
+      <div class="exam-card"><h3>SPLE</h3><p>Saudi Pharmacist Licensure Examination.</p><a href="sple.html">Take Mock Exam</a></div>
+    </div>
+
+    <div class="nav-btn-container">
+      <button onclick="history.back()" class="nav-btn"><i class="fas fa-chevron-left"></i>&nbsp; Back</button>
+      <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house"></i>&nbsp; Home</a>
+      <button id="forward-btn" onclick="history.forward()" class="nav-btn">Forward &nbsp;<i class="fas fa-chevron-right"></i></button>
+    </div>
+  </main>
+
+  <script>
+    window.onload = function() {
+      if (window.navigation && window.navigation.canGoForward) {
+          document.getElementById('forward-btn').style.display = 'inline-flex';
+      } else if (performance.navigation.type === 2) {
+          document.getElementById('forward-btn').style.display = 'inline-flex';
+      }
+    };
+  </script>
+
+  <script>
+    (function () {
+        window.onpageshow = function(event) {
+            if (event.persisted) { window.location.reload(); }
+        };
+
+        window.addEventListener('load', function() {
+            const forwardBtn = document.getElementById('forward-btn');
+            if (forwardBtn) {
+                const canGoForward = (window.navigation && window.navigation.canGoForward) || (performance.navigation.type === 2);
+                forwardBtn.style.display = canGoForward ? 'inline-flex' : 'none';
+            }
+        });
+    })();
+  </script>
+
+  <!-- Firebase Auth Protection -->
+ <script type="module">
+  // Import Firebase functions
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+  // Your new Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC4kGcT5L6p1B1aD2WAeo0OCXin1If8B_o",
+    authDomain: "gulfmedicalexamz.firebaseapp.com",
+    projectId: "gulfmedicalexamz",
+    storageBucket: "gulfmedicalexamz.firebasestorage.app",
+    messagingSenderId: "23161933734",
+    appId: "1:23161933734:web:06b63e4853387efc174967",
+    measurementId: "G-HL25Q2S4BW"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  // Protect page: redirect if not logged in
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      alert("Please login to access this page.");
+      window.location.href = "index.html"; // redirect to main page
+    }
+  });
+</script>
+</body>
+</html>
