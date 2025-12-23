@@ -135,12 +135,19 @@
 </div>
 
 <header>
-  <a href="#" class="brand">Gulf Medical Examz</a>
+  
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px;">
+  <a href="/" class="brand" style="display: flex; align-items: center; text-decoration: none;">
+    <img src="/image/android-chrome-192x192.png" alt="Logo" style="height: 32px; width: auto; margin-right: 10px;">
+    <span>Gulf Medical Examz</span>
+  </a>
+
   <nav>
     <a href="#">Exams</a>
     <a href="#">Resources</a>
     <a href="#">Jobs</a>
   </nav>
+  
   <div class="user-container">
     <button class="login-btn" id="loginBtn" onclick="handleLogin()">Login / Sign up</button>
     <div id="userMenu" style="display:none;">
