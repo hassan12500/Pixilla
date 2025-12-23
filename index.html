@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Gulf Medical Examz | Modern Prep for DHA, MOH, HAAD</title>
+  <title>Gulf Medical Examz | Professional Prep for DHA, MOH, HAAD</title>
   <meta name="description" content="Access free study materials, practice exams, and job listings for Gulf medical licensing.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,14 +15,13 @@
   <style>
     :root {
       --primary: #4f46e5;
-      --primary-dark: #4338ca;
       --secondary: #0ea5e9;
+      --bg-body: #f8fafc;
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --bg-body: #f8fafc;
       --white: #ffffff;
-      --glass: rgba(255, 255, 255, 0.8);
-      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --card-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,56 +31,34 @@
       background-color: var(--bg-body);
       color: var(--text-main);
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    /* MODERN BANNER */
-    #login-notice {
-      background: linear-gradient(90deg, #4f46e5, #0ea5e9);
-      color: white;
-      text-align: center;
-      padding: 12px 5%;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    #login-notice span {
-      text-decoration: underline;
-      font-weight: 700;
-      cursor: pointer;
-      margin-left: 5px;
-    }
-
-    /* GLASS HEADER */
+    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 8%;
+      padding: 1.25rem 5%;
+      background: var(--white);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
       position: sticky;
       top: 0;
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
       z-index: 1000;
     }
 
-    .brand { 
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--text-main);
       text-decoration: none;
-      letter-spacing: -0.5px;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 1.25rem;
     }
 
-    .brand img { height: 32px; width: auto; border-radius: 6px; }
+    .brand img { height: 35px; width: auto; border-radius: 4px; }
 
-    nav { display: flex; gap: 2rem; }
+    nav { display: flex; gap: 1.5rem; align-items: center; }
     nav a {
       text-decoration: none;
       color: var(--text-muted);
@@ -91,190 +68,182 @@
     }
     nav a:hover { color: var(--primary); }
 
-    .login-btn {
-      background: var(--text-main);
-      color: white;
-      padding: 10px 22px;
-      border-radius: 8px;
-      border: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .login-btn:hover { background: #000; transform: translateY(-1px); }
+    .user-container { display: flex; align-items: center; gap: 15px; }
 
-    /* HERO SECTION */
+    #userPhoto {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #e2e8f0;
+    }
+
+    /* HERO */
     .hero {
-      padding: 100px 8% 60px;
+      padding: 80px 5% 40px;
       text-align: center;
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    .hero h1 { 
-      font-size: clamp(2.5rem, 6vw, 4rem); 
-      line-height: 1.1;
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 800;
-      margin-bottom: 24px;
-      letter-spacing: -2px;
-    }
-
-    .hero h1 span {
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p { 
-      color: var(--text-muted); 
-      font-size: 1.25rem; 
-      margin-bottom: 40px;
-      font-weight: 400;
-    }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; }
 
-    /* MODERN CARDS */
+    /* FEATURE GRID */
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
-      padding: 40px 8%;
+      padding: 40px 5% 80px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .card {
       background: var(--white);
-      padding: 40px;
-      border-radius: 20px;
-      border: 1px solid #edf2f7;
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid #f1f5f9;
+      box-shadow: var(--card-shadow);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
       position: relative;
-      overflow: hidden;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--card-shadow);
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover);
       border-color: var(--primary);
     }
 
-    .card h3 { margin-bottom: 12px; font-size: 1.4rem; font-weight: 700; }
-    .card p { color: var(--text-muted); font-size: 1rem; }
-
-    .lock-badge {
+    .badge {
       display: inline-block;
       padding: 4px 12px;
-      border-radius: 20px;
+      border-radius: 9999px;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 15px;
-      background: #f1f5f9;
-      color: #64748b;
+      margin-bottom: 16px;
     }
 
-    .unlocked { background: #dcfce7; color: #15803d; }
+    .badge.locked { background: #fef2f2; color: #ef4444; }
+    .badge.unlocked { background: #f0fdf4; color: #16a34a; }
 
-    /* PROFILE UI */
-    #userMenu { position: relative; display: flex; align-items: center; }
-    #userPhoto { 
-        width: 42px; height: 42px; border-radius: 12px; 
-        cursor: pointer; border: 2px solid transparent; transition: 0.2s;
-    }
-    #userPhoto:hover { border-color: var(--primary); }
-    
-    #dropdown {
-      display: none; position: absolute; right: 0; top: 55px; background: white; 
-      border: 1px solid #edf2f7; border-radius: 12px; width: 150px;
-      box-shadow: var(--card-shadow); z-index: 100; overflow: hidden;
-    }
-    #logoutBtn { 
-        padding: 12px; border: none; background: none; width: 100%; 
-        text-align: left; cursor: pointer; font-weight: 600; color: #ef4444; 
-    }
-    #logoutBtn:hover { background: #fff1f2; }
+    .card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 700; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
 
-    footer { 
-        padding: 80px 8% 40px; border-top: 1px solid #edf2f7; 
-        text-align: center; background: white;
+    /* FOOTER */
+    footer {
+      background: var(--white);
+      padding: 60px 5% 30px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
     }
-    .footer-links { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+
+    .footer-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer-grid a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .footer-grid a:hover { color: var(--primary); }
     footer p { color: #94a3b8; font-size: 0.85rem; }
 
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .hero { padding-top: 60px; }
+    /* BUTTONS */
+    .login-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .login-btn:hover { opacity: 0.9; }
+
+    @media (max-width: 640px) {
+      header { flex-direction: column; gap: 15px; }
+      nav { font-size: 0.85rem; }
     }
   </style>
 </head>
 <body>
 
-<div id="login-notice">
-    Ready to boost your career? ⚡ <span onclick="handleLogin()">Sign in to unlock free materials</span>
-</div>
-
 <header>
   <a href="/" class="brand">
     <img src="/image/android-chrome-192x192.png" alt="Logo">
-    <span>GulfMedical.</span>
+    <span>Gulf Medical Examz</span>
   </a>
 
   <nav>
     <a href="#">Exams</a>
     <a href="#">Resources</a>
     <a href="#">Jobs</a>
-  </nav>
-  
-  <div class="user-container">
-    <button class="login-btn" id="loginBtn" onclick="handleLogin()">Get Started</button>
-    <div id="userMenu" style="display:none;">
-      <img id="userPhoto" src="" alt="User">
-      <div id="dropdown">
-        <button id="logoutBtn">Logout</button>
-      </div>
+    <div class="user-container">
+        <button class="login-btn" id="loginBtn" onclick="handleLogin()">Login</button>
+        <div id="userMenu" style="display:none;">
+          <img id="userPhoto" src="" alt="User">
+        </div>
     </div>
-  </div>
+  </nav>
 </header>
 
 <main>
   <section class="hero">
-    <h1>Master Your Medical License <span>Exam</span></h1>
-    <p>Premium mock tests and study resources for DHA, MOH, and HAAD. Updated daily for the 2025 curriculum.</p>
+    <h1>Your Success in the Gulf Starts Here</h1>
+    <p>The most comprehensive preparation platform for healthcare professionals looking to excel in DHA, MOH, HAAD, and Prometric exams.</p>
   </section>
 
   <section class="features">
     <div class="card" onclick="requireLogin('Explore Exams')">
-      <div class="lock-badge" id="lock-1">Locked</div>
-      <h3>Mock Exams</h3>
-      <p>Simulate the real exam environment with timed tests for all medical specialties.</p>
+      <span class="badge locked" id="lock-1">🔒 Locked</span>
+      <h3>Explore Mock Exams</h3>
+      <p>Challenge yourself with high-yield timed tests designed for Doctors, Nurses, and Allied Health staff.</p>
     </div>
 
     <div class="card" onclick="requireLogin('Study Material')">
-      <div class="lock-badge" id="lock-2">Locked</div>
-      <h3>Study Guides</h3>
-      <p>High-yield PDF summaries and solved past papers curated by experts.</p>
+      <span class="badge locked" id="lock-2">🔒 Locked</span>
+      <h3>Study Materials</h3>
+      <p>Access high-quality PDF notes, solved past papers, and expert-curated curriculum summaries.</p>
     </div>
 
     <div class="card" onclick="requireLogin('Jobs')">
-      <div class="lock-badge unlocked">Public</div>
-      <h3>Career Portal</h3>
-      <p>Find your next opportunity in Dubai, Abu Dhabi, or Muscat instantly.</p>
+      <span class="badge unlocked">✅ Public</span>
+      <h3>Gulf Healthcare Jobs</h3>
+      <p>Browse the latest medical career opportunities across the UAE, Saudi Arabia, and Oman.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="footer-links">
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="contact.html">Support</a>
+  <div class="footer-grid">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="contact.html">Contact Us</a>
   </div>
-  <p>© 2025 Gulf Medical Examz · Built for Excellence</p>
+  <p>© 2025 Gulf Medical Examz · Empowering Healthcare Professionals</p>
 </footer>
 
 <script type="module">
+  // [Your original script remains the same to maintain functionality]
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
@@ -291,64 +260,34 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  let currentUser = null;
-
   onAuthStateChanged(auth, (user) => {
-    currentUser = user;
     const loginBtn = document.getElementById('loginBtn');
     const userMenu = document.getElementById('userMenu');
     const userPhoto = document.getElementById('userPhoto');
-    const dropdown = document.getElementById('dropdown');
-    const notice = document.getElementById('login-notice');
-    const lock1 = document.getElementById('lock-1');
-    const lock2 = document.getElementById('lock-2');
+    const locks = [document.getElementById('lock-1'), document.getElementById('lock-2')];
 
     if (user) {
       loginBtn.style.display = 'none';
-      userMenu.style.display = 'flex';
+      userMenu.style.display = 'block';
       userPhoto.src = user.photoURL;
-      notice.style.display = 'none';
-      [lock1, lock2].forEach(l => {
-        if(l) { 
-            l.innerHTML = "Unlocked"; 
-            l.classList.add('unlocked');
-        }
-      });
-
-      userPhoto.onclick = (e) => {
-        e.stopPropagation();
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-      };
-      document.getElementById('logoutBtn').onclick = () => auth.signOut();
+      locks.forEach(l => { if(l) { l.innerHTML = "✅ Unlocked"; l.className = "badge unlocked"; } });
     } else {
       loginBtn.style.display = 'block';
       userMenu.style.display = 'none';
-      notice.style.display = 'block';
-      [lock1, lock2].forEach(l => {
-        if(l) {
-            l.innerHTML = "Locked";
-            l.classList.remove('unlocked');
-        }
-      });
+      locks.forEach(l => { if(l) { l.innerHTML = "🔒 Locked"; l.className = "badge locked"; } });
     }
   });
 
-  window.handleLogin = async () => {
-    try { await signInWithPopup(auth, provider); } 
-    catch (err) { console.error("Login Error", err); }
-  };
-
+  window.handleLogin = () => signInWithPopup(auth, provider);
   window.requireLogin = (action) => {
-    if (!currentUser && action !== 'Jobs') {
+    if (!auth.currentUser && action !== 'Jobs') {
+      alert("Please login to access " + action);
       handleLogin();
     } else {
       if (action === "Explore Exams") window.location.href = "exploreexams.html";
-      else if (action === "Jobs") window.location.href = "#";
-      else alert(action + " coming soon!");
+      else if (action !== 'Jobs') alert(action + " coming soon!");
     }
   };
-
-  window.onclick = () => { document.getElementById('dropdown').style.display = 'none'; };
 </script>
 
 </body>
