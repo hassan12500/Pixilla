@@ -833,5 +833,38 @@
             document.getElementById('results-sheet').innerHTML = tableHTML;
         }
     </script>
+
+    
+<!-- Firebase Auth Protection -->
+ <script type="module">
+  // Import Firebase functions
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+  // Your new Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC4kGcT5L6p1B1aD2WAeo0OCXin1If8B_o",
+    authDomain: "gulfmedicalexamz.firebaseapp.com",
+    projectId: "gulfmedicalexamz",
+    storageBucket: "gulfmedicalexamz.firebasestorage.app",
+    messagingSenderId: "23161933734",
+    appId: "1:23161933734:web:06b63e4853387efc174967",
+    measurementId: "G-HL25Q2S4BW"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  // Protect page: redirect if not logged in
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      alert("Please login to access this page.");
+      window.location.href = "index.html"; // redirect to main page
+    }
+  });
+</script>  
 </body>
 </html>
