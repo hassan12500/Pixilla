@@ -5,9 +5,18 @@
     <lastmod>2025-12-23</lastmod>
     <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>https://gulfmedicalexamz.web.app/privacy.html</loc>
+    <lastmod>2025-12-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gulfmedicalexamz.web.app/terms.html</loc>
+    <lastmod>2025-12-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gulfmedicalexamz.web.app/contact.html</loc>
     <lastmod>2025-12-23</lastmod>
     <priority>0.8</priority>
   </url>
