@@ -57,22 +57,35 @@
       color: var(--primary);
     }
 
-    /* HEADER & NAV */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 5%;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      z-index: 1000;
-    }
+/* HEADER & NAV */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1000;
+}
 
-    .brand { font-size: 1.25rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-    nav a { margin: 0 15px; text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
-    .login-btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+/* Updated Brand class for Logo + Text */
+.brand { 
+  display: flex;           /* Added: enables side-by-side */
+  align-items: center;      /* Added: centers logo and text vertically */
+  gap: 12px;               /* Added: clean space between logo and text */
+  font-size: 1.25rem; 
+  font-weight: 700; 
+  color: var(--primary); 
+  text-decoration: none; 
+}
+
+/* Adjust the logo size specifically */
+.brand img {
+  height: 35px;            /* Adjust this to make your logo bigger or smaller */
+  width: auto;
+}
 
     /* HERO SECTION */
     .hero {
