@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAAD-DOH Exam 1 | Gulf Medical Examz</title>
+    <title>HAAD-DOH Exam 6 | Gulf Medical Examz</title>
     
     <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     
@@ -29,7 +29,7 @@
 
     <div id="payment-screen" class="exam-card">
         <div class="lock-icon">🔒</div>
-        <h1>Premium Mock Exam 1</h1>
+        <h1>Premium Mock Exam 6</h1>
         <p>This is a premium high-yield exam. Pay once and get lifetime access.</p>
         <div class="price-tag">$5.00 USD</div>
         <div id="paypal-button-container"></div>
@@ -37,7 +37,7 @@
     </div>
 
     <div id="start-screen" class="exam-card hidden" style="text-align: center;">
-        <h1>HAAD-DOH Mock Exam 1</h1>
+        <h1>HAAD-DOH Mock Exam 6</h1>
         <p>50 Questions | 40 Minutes</p>
         <button class="btn-next" onclick="startExam()">Start Exam Now</button>
     </div>
@@ -73,8 +73,8 @@
                 return;
             }
 
-            // Check if user already paid for EXAM 1
-            const paymentRef = doc(db, "users", user.uid, "payments", "exam1");
+            // Check if user already paid for EXAM 6
+            const paymentRef = doc(db, "users", user.uid, "payments", "exam6");
             const paymentSnap = await getDoc(paymentRef);
 
             if (paymentSnap.exists()) {
@@ -95,14 +95,14 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: { value: '5.00' },
-                            description: "HAAD-DOH Premium Exam 1"
+                            description: "HAAD-DOH Premium Exam 6"
                         }]
                     });
                 },
                 onApprove: (data, actions) => {
                     return actions.order.capture().then(async (details) => {
                         // SUCCESS! Save to Firestore
-                        await setDoc(doc(db, "users", uid, "payments", "exam1"), {
+                        await setDoc(doc(db, "users", uid, "payments", "exam6"), {
                             paid: true,
                             email: details.payer.email_address,
                             date: new Date().toISOString()
