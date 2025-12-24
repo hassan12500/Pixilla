@@ -76,6 +76,17 @@
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid #e2e8f0;
+      transition: transform 0.2s;
+    }
+    #userPhoto:hover { transform: scale(1.1); border-color: #ef4444; } /* Visual hint for logout */
+
+    /* Language Switcher Style */
+    .lang-select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+      cursor: pointer;
     }
 
     /* HERO */
@@ -183,6 +194,9 @@
       header { flex-direction: column; gap: 15px; }
       nav { font-size: 0.85rem; }
     }
+    
+    /* RTL Support for Arabic */
+    body.rtl { direction: rtl; }
   </style>
 </head>
 <body>
@@ -194,13 +208,17 @@
   </a>
 
   <nav>
-    <a href="#">Exams</a>
-    <a href="#">Resources</a>
-    <a href="#">Jobs</a>
+    <select class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ar">العربية (Arabic)</option>
+    </select>
+    <a href="#" data-i18n="nav-exams">Exams</a>
+    <a href="#" data-i18n="nav-resources">Resources</a>
+    <a href="#" data-i18n="nav-jobs">Jobs</a>
     <div class="user-container">
-        <button class="login-btn" id="loginBtn" onclick="handleLogin()">Login</button>
+        <button class="login-btn" id="loginBtn" onclick="handleLogin()" data-i18n="login-btn">Login</button>
         <div id="userMenu" style="display:none;">
-          <img id="userPhoto" src="" alt="User">
+          <img id="userPhoto" src="" alt="User" onclick="handleLogout()" title="Click to Logout">
         </div>
     </div>
   </nav>
@@ -208,44 +226,43 @@
 
 <main>
   <section class="hero">
-    <h1>Your Success in the Gulf Starts Here</h1>
-    <p>The most comprehensive preparation platform for healthcare professionals looking to excel in DHA, MOH, HAAD, and Prometric exams.</p>
+    <h1 data-i18n="hero-title">Your Success in the Gulf Starts Here</h1>
+    <p data-i18n="hero-desc">The most comprehensive preparation platform for healthcare professionals looking to excel in DHA, MOH, HAAD, and Prometric exams.</p>
   </section>
 
   <section class="features">
     <div class="card" onclick="requireLogin('Explore Exams')">
-      <span class="badge locked" id="lock-1">🔒 Locked</span>
-      <h3>Explore Mock Exams</h3>
-      <p>Challenge yourself with high-yield timed tests designed for Doctors, Nurses, and Allied Health staff.</p>
+      <span class="badge locked" id="lock-1" data-i18n="locked">🔒 Locked</span>
+      <h3 data-i18n="card1-title">Explore Mock Exams</h3>
+      <p data-i18n="card1-desc">Challenge yourself with high-yield timed tests designed for Doctors, Nurses, and Allied Health staff.</p>
     </div>
 
     <div class="card" onclick="requireLogin('Study Material')">
-      <span class="badge locked" id="lock-2">🔒 Locked</span>
-      <h3>Study Materials</h3>
-      <p>Access high-quality PDF notes, solved past papers, and expert-curated curriculum summaries.</p>
+      <span class="badge locked" id="lock-2" data-i18n="locked">🔒 Locked</span>
+      <h3 data-i18n="card2-title">Study Materials</h3>
+      <p data-i18n="card2-desc">Access high-quality PDF notes, solved past papers, and expert-curated curriculum summaries.</p>
     </div>
 
     <div class="card" onclick="requireLogin('Jobs')">
-      <span class="badge unlocked">✅ Public</span>
-      <h3>Gulf Healthcare Jobs</h3>
-      <p>Browse the latest medical career opportunities across the UAE, Saudi Arabia, and Oman.</p>
+      <span class="badge unlocked" data-i18n="public">✅ Public</span>
+      <h3 data-i18n="card3-title">Gulf Healthcare Jobs</h3>
+      <p data-i18n="card3-desc">Browse the latest medical career opportunities across the UAE, Saudi Arabia, and Oman.</p>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="footer-grid">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-    <a href="contact.html">Contact Us</a>
+    <a href="privacy.html" data-i18n="footer-privacy">Privacy Policy</a>
+    <a href="terms.html" data-i18n="footer-terms">Terms of Service</a>
+    <a href="contact.html" data-i18n="footer-contact">Contact Us</a>
   </div>
-  <p>© 2025 Gulf Medical Examz · Empowering Healthcare Professionals</p>
+  <p>© 2025 Gulf Medical Examz · <span data-i18n="footer-tag">Empowering Healthcare Professionals</span></p>
 </footer>
 
 <script type="module">
-  // [Your original script remains the same to maintain functionality]
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC4kGcT5L6p1B1aD2WAeo0OCXin1If8B_o",
@@ -260,6 +277,41 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
+  // --- LANGUAGE LOGIC ---
+  const translations = {
+    en: {
+        "nav-exams": "Exams", "nav-resources": "Resources", "nav-jobs": "Jobs", "login-btn": "Login",
+        "hero-title": "Your Success in the Gulf Starts Here",
+        "hero-desc": "The most comprehensive preparation platform for healthcare professionals.",
+        "locked": "🔒 Locked", "unlocked": "✅ Unlocked", "public": "✅ Public",
+        "card1-title": "Explore Mock Exams", "card1-desc": "Challenge yourself with high-yield timed tests.",
+        "card2-title": "Study Materials", "card2-desc": "Access high-quality PDF notes and past papers.",
+        "card3-title": "Gulf Healthcare Jobs", "card3-desc": "Browse latest medical career opportunities.",
+        "footer-privacy": "Privacy Policy", "footer-terms": "Terms of Service", "footer-contact": "Contact Us",
+        "footer-tag": "Empowering Healthcare Professionals"
+    },
+    ar: {
+        "nav-exams": "الامتحانات", "nav-resources": "المصادر", "nav-jobs": "وظائف", "login-btn": "تسجيل الدخول",
+        "hero-title": "نجاحك في الخليج يبدأ من هنا",
+        "hero-desc": "المنصة الأكثر شمولاً لتحضير الكوادر الطبية للامتحانات.",
+        "locked": "🔒 مغلق", "unlocked": "✅ مفتوح", "public": "✅ عام",
+        "card1-title": "استكشف الامتحانات التجريبية", "card1-desc": "تحدى نفسك باختبارات موقوتة عالية الجودة.",
+        "card2-title": "مواد الدراسة", "card2-desc": "احصل على مذكرات PDF وأوراق سابقة محلولة.",
+        "card3-title": "وظائف الرعاية الصحية", "card3-desc": "تصفح أحدث الفرص الوظيفية الطبية في الخليج.",
+        "footer-privacy": "سياسة الخصوصية", "footer-terms": "شروط الخدمة", "footer-contact": "اتصل بنا",
+        "footer-tag": "تمكين الكوادر الطبية"
+    }
+  };
+
+  window.changeLanguage = (lang) => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      el.innerText = translations[lang][key];
+    });
+    document.body.classList.toggle('rtl', lang === 'ar');
+  };
+
+  // --- AUTH LOGIC ---
   onAuthStateChanged(auth, (user) => {
     const loginBtn = document.getElementById('loginBtn');
     const userMenu = document.getElementById('userMenu');
@@ -270,15 +322,39 @@
       loginBtn.style.display = 'none';
       userMenu.style.display = 'block';
       userPhoto.src = user.photoURL;
-      locks.forEach(l => { if(l) { l.innerHTML = "✅ Unlocked"; l.className = "badge unlocked"; } });
+      locks.forEach(l => { 
+        if(l) { 
+            l.innerHTML = "✅ Unlocked"; 
+            l.className = "badge unlocked";
+            l.removeAttribute('data-i18n'); // Stop translation from reverting it to "Locked"
+        } 
+      });
     } else {
       loginBtn.style.display = 'block';
       userMenu.style.display = 'none';
-      locks.forEach(l => { if(l) { l.innerHTML = "🔒 Locked"; l.className = "badge locked"; } });
+      locks.forEach(l => { 
+        if(l) { 
+            l.innerHTML = "🔒 Locked"; 
+            l.className = "badge locked"; 
+            l.setAttribute('data-i18n', 'locked');
+        } 
+      });
     }
   });
 
   window.handleLogin = () => signInWithPopup(auth, provider);
+  
+  // LOGOUT FUNCTION
+  window.handleLogout = () => {
+    if(confirm("Do you want to logout?")) {
+        signOut(auth).then(() => {
+            alert("Logged out successfully");
+        }).catch((error) => {
+            console.error("Logout Error", error);
+        });
+    }
+  };
+
   window.requireLogin = (action) => {
     if (!auth.currentUser && action !== 'Jobs') {
       alert("Please login to access " + action);
