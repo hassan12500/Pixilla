@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* EXACT STYLES FROM MAIN PAGE */
     :root {
       --primary: #4f46e5;
       --secondary: #0ea5e9;
@@ -19,8 +20,8 @@
       --text-muted: #64748b;
       --white: #ffffff;
       --border: #e2e8f0;
-      --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-      --card-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --card-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +35,7 @@
 
     body.rtl { direction: rtl; }
 
-    /* HEADER - Consistent with Index */
+    /* HEADER FIX - Ensures it looks like index.html */
     header {
       display: flex;
       justify-content: space-between;
@@ -57,14 +58,27 @@
       font-size: 1.25rem;
     }
 
-    .brand img { height: 35px; width: auto; border-radius: 4px; }
+    .brand img { 
+      height: 35px; 
+      width: auto; 
+      border-radius: 4px; 
+      display: block; 
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
 
     .lang-select {
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 8px;
       border: 1px solid var(--border);
       font-family: inherit;
       font-size: 0.85rem;
+      font-weight: 600;
+      background: var(--bg-body);
       cursor: pointer;
     }
 
@@ -77,45 +91,45 @@
       padding: 20px;
       color: #94a3b8;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       border: 2px dashed var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
     }
 
-    /* HERO */
+    /* HERO SECTION */
     .hero {
-      padding: 60px 5% 30px;
+      padding: 60px 5% 20px;
       text-align: center;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
       font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
+      letter-spacing: -1.5px;
+      margin-bottom: 0.75rem;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p { color: var(--text-muted); font-size: 1.1rem; }
+    .hero p { color: var(--text-muted); font-size: 1.15rem; font-weight: 500; }
 
-    /* EXAM GRID */
+    /* GRID FIX */
     .main-content { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
     
     .exam-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
     }
 
     .exam-card {
       background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
+      border: 1px solid #f1f5f9;
+      border-radius: 20px;
+      padding: 35px;
       display: flex;
       flex-direction: column;
       box-shadow: var(--card-shadow);
@@ -125,48 +139,48 @@
     }
 
     .exam-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       box-shadow: var(--card-hover);
       border-color: var(--primary);
     }
 
-    .exam-card h3 { font-size: 1.3rem; margin-bottom: 12px; font-weight: 700; color: var(--text-main); }
-    .exam-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+    .exam-card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 800; color: var(--text-main); }
+    .exam-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 24px; flex-grow: 1; }
     
     .take-btn {
       color: var(--primary);
       font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
+      gap: 10px;
+      font-size: 1rem;
     }
 
-    /* NAVIGATION BUTTONS */
+    /* FOOTER NAVIGATION */
     .nav-btn-container {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 60px;
-      padding-bottom: 40px;
+      margin: 60px 0 40px;
     }
 
     .nav-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
+      gap: 10px;
+      padding: 14px 28px;
       background: var(--white);
       color: var(--text-main);
       border: 1px solid var(--border);
       border-radius: 12px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
+      font-size: 0.95rem;
       transition: all 0.2s;
     }
 
-    .nav-btn:hover { background: #f1f5f9; }
+    .nav-btn:hover { background: #f8fafc; border-color: var(--primary); }
 
     .nav-btn.home-btn {
       background: var(--primary);
@@ -174,11 +188,11 @@
       border: none;
     }
 
-    .nav-btn.home-btn:hover { opacity: 0.9; }
-
     @media (max-width: 640px) {
-      header { flex-direction: column; gap: 15px; }
-      .nav-btn-container { flex-direction: column; }
+      header { flex-direction: column; padding: 1.5rem 5%; gap: 1rem; }
+      .hero h1 { font-size: 2rem; }
+      .nav-btn-container { flex-direction: column; align-items: stretch; }
+      .nav-btn { justify-content: center; }
     }
   </style>
 </head>
@@ -190,58 +204,64 @@
     <span>Gulf Medical Examz</span>
   </a>
 
-  <select class="lang-select" onchange="changeLanguage(this.value)">
-      <option value="en">English</option>
-      <option value="ar">العربية (Arabic)</option>
-      <option value="ur">اردو (Urdu)</option>
-  </select>
+  <div class="nav-right">
+    <select class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="ar">العربية (Arabic)</option>
+        <option value="ur">اردو (Urdu)</option>
+    </select>
+  </div>
 </header>
 
-<div class="ad-slot">ADVERTISEMENT</div>
+<div class="ad-slot">ADVERTISEMENT SLOT</div>
 
 <section class="hero">
   <h1 data-i18n="hero-title">Explore Mock Exams</h1>
-  <p data-i18n="hero-desc">All major Gulf medical licenses in one place.</p>
+  <p data-i18n="hero-desc">The most trusted preparation platform for Gulf medical licensing.</p>
 </section>
 
 <main class="main-content">
   <div class="exam-grid">
     <a href="dha.html" class="exam-card">
-      <h3>DHA</h3>
-      <p data-i18n="dha-p">Dubai Health Authority licensing.</p>
+      <h3>DHA (Dubai)</h3>
+      <p data-i18n="dha-p">Comprehensive mock tests for Dubai Health Authority licensing.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
+    
     <a href="haad-doh.html" class="exam-card">
-      <h3>HAAD-DOH</h3>
-      <p data-i18n="haad-p">Abu Dhabi Health Authority.</p>
+      <h3>HAAD / DOH</h3>
+      <p data-i18n="haad-p">Practice exams specifically for Abu Dhabi health professionals.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
+
     <a href="dhp-moph.html" class="exam-card">
-      <h3>DHP-MOPH</h3>
-      <p data-i18n="dhp-p">Qatar Ministry of Public Health.</p>
+      <h3>DHP-MOPH (Qatar)</h3>
+      <p data-i18n="dhp-p">Department of Healthcare Professions licensing for Qatar.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
+
     <a href="omsb.html" class="exam-card">
-      <h3>OMSB</h3>
-      <p data-i18n="omsb-p">Oman Medical Specialty Board.</p>
+      <h3>OMSB (Oman)</h3>
+      <p data-i18n="omsb-p">Oman Medical Specialty Board preparation and mock papers.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
+
     <a href="nhra.html" class="exam-card">
-      <h3>NHRA</h3>
-      <p data-i18n="nhra-p">Bahrain National Health Regulatory Authority.</p>
+      <h3>NHRA (Bahrain)</h3>
+      <p data-i18n="nhra-p">Bahrain National Health Regulatory Authority mock tests.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
+
     <a href="sple.html" class="exam-card">
-      <h3>SPLE</h3>
-      <p data-i18n="sple-p">Saudi Pharmacist Licensure Examination.</p>
+      <h3>SPLE (Saudi)</h3>
+      <p data-i18n="sple-p">Saudi Pharmacist Licensure Examination official-style mocks.</p>
       <div class="take-btn"><span data-i18n="take-exam">Take Mock Exam</span> <i class="fas fa-arrow-right"></i></div>
     </a>
   </div>
 
   <div class="nav-btn-container">
     <button onclick="history.back()" class="nav-btn"><i class="fas fa-chevron-left"></i> <span data-i18n="back">Back</span></button>
-    <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house"></i> <span data-i18n="home">Home</span></a>
-    <button id="forward-btn" onclick="history.forward()" class="nav-btn" style="display:none;"><span data-i18n="forward">Forward</span> <i class="fas fa-chevron-right"></i></button>
+    <a href="index.html" class="nav-btn home-btn"><i class="fas fa-house"></i> <span data-i18n="home">Return Home</span></a>
   </div>
 </main>
 
@@ -261,35 +281,42 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  // AUTH PROTECTION
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       window.location.href = "index.html"; 
     }
   });
 
-  // LANGUAGE LOGIC
   const langData = {
     en: {
-        "hero-title": "Explore Mock Exams", "hero-desc": "All major Gulf medical licenses in one place.",
-        "take-exam": "Take Mock Exam", "back": "Back", "home": "Home", "forward": "Forward",
-        "dha-p": "Dubai Health Authority licensing.", "haad-p": "Abu Dhabi Health Authority.",
-        "dhp-p": "Qatar Ministry of Public Health.", "omsb-p": "Oman Medical Specialty Board.",
-        "nhra-p": "Bahrain National Health Regulatory Authority.", "sple-p": "Saudi Pharmacist Licensure Examination."
+        "hero-title": "Explore Mock Exams", "hero-desc": "The most trusted preparation platform for Gulf medical licensing.",
+        "take-exam": "Take Mock Exam", "back": "Back", "home": "Return Home",
+        "dha-p": "Comprehensive mock tests for Dubai Health Authority licensing.",
+        "haad-p": "Practice exams specifically for Abu Dhabi health professionals.",
+        "dhp-p": "Department of Healthcare Professions licensing for Qatar.",
+        "omsb-p": "Oman Medical Specialty Board preparation and mock papers.",
+        "nhra-p": "Bahrain National Health Regulatory Authority mock tests.",
+        "sple-p": "Saudi Pharmacist Licensure Examination official-style mocks."
     },
     ar: {
-        "hero-title": "استكشف الامتحانات التجريبية", "hero-desc": "جميع تراخيص الطب الرئيسية في الخليج في مكان واحد.",
-        "take-exam": "ابدأ الامتحان", "back": "رجوع", "home": "الرئيسية", "forward": "للمام",
-        "dha-p": "ترخيص هيئة الصحة بدبي.", "haad-p": "هيئة الصحة بأبوظبي.",
-        "dhp-p": "وزارة الصحة العامة في قطر.", "omsb-p": "المجلس العماني للاختصاصات الطبية.",
-        "nhra-p": "الهيئة الوطنية لتنظيم المهن الصحية بالبحرين.", "sple-p": "امتحان ترخيص الصيادلة السعوديين."
+        "hero-title": "استكشف الامتحانات", "hero-desc": "منصة التحضير الأكثر موثوقية لتراخيص الطب في الخليج.",
+        "take-exam": "ابدأ الآن", "back": "رجوع", "home": "الرئيسية",
+        "dha-p": "اختبارات تجريبية شاملة لترخيص هيئة الصحة بدبي.",
+        "haad-p": "امتحانات مخصصة لمهنيي الصحة في أبوظبي.",
+        "dhp-p": "ترخيص إدارة المهن الصحية في قطر.",
+        "omsb-p": "تحضير واختبارات المجلس العماني للاختصاصات الطبية.",
+        "nhra-p": "اختبارات الهيئة الوطنية لتنظيم المهن الصحية بالبحرين.",
+        "sple-p": "اختبارات ترخيص الصيادلة السعوديين الرسمية."
     },
     ur: {
-        "hero-title": "موک امتحانات تلاش کریں", "hero-desc": "خلیج کے تمام بڑے میڈیکل لائسنس ایک جگہ۔",
-        "take-exam": "امتحان دیں", "back": "پیچھے", "home": "ہوم", "forward": "آگے",
-        "dha-p": "دبئی ہیلتھ اتھارٹی لائسنسنگ۔", "haad-p": "ابوظہبی ہیلتھ اتھارٹی۔",
-        "dhp-p": "قطر کی وزارت صحت عامہ۔", "omsb-p": "عمان میڈیکل سپیشلٹی بورڈ۔",
-        "nhra-p": "بحرین نیشنل ہیلتھ ریگولیٹری اتھارٹی۔", "sple-p": "سعودی فارماسسٹ لائسنس امتحان۔"
+        "hero-title": "موک امتحانات", "hero-desc": "خلیج میڈیکل لائسنسنگ کے لیے سب سے قابل اعتماد پلیٹ فارم۔",
+        "take-exam": "امتحان شروع کریں", "back": "پیچھے", "home": "ہوم پیج",
+        "dha-p": "دبئی ہیلتھ اتھارٹی لائسنسنگ کے لیے جامع موک ٹیسٹ۔",
+        "haad-p": "ابوظہبی کے طبی پیشہ ور افراد کے لیے خصوصی امتحانات۔",
+        "dhp-p": "قطر کے لیے محکمہ ہیلتھ کیئر پروفیشنز لائسنسنگ۔",
+        "omsb-p": "عمان میڈیکل سپیشلٹی بورڈ کی تیاری اور موک پیپرز۔",
+        "nhra-p": "بحرین نیشنل ہیلتھ ریگولیٹری اتھارٹی کے موک ٹیسٹ۔",
+        "sple-p": "سعودی فارماسسٹ لائسنس امتحان کے آفیشل اسٹائل موکس۔"
     }
   };
 
@@ -300,14 +327,6 @@
     });
     document.getElementById('body').className = (lang === 'ar' || lang === 'ur') ? 'rtl' : '';
   };
-
-  // Check for Forward Navigation
-  window.onload = () => {
-    if (window.navigation && window.navigation.canGoForward) {
-      document.getElementById('forward-btn').style.display = 'inline-flex';
-    }
-  };
 </script>
-
 </body>
 </html>
