@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAAD-DOH Exam 1 | Gulf Medical Examz</title>
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing styles remain exactly the same */
+        :root { --primary: #2563eb; --secondary: #64748b; --success: #22c55e; --danger: #ef4444; --bg: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .exam-card { background: white; width: 90%; max-width: 800px; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .hidden { display: none !important; }
+        
+        /* New Payment Screen Styles */
+        #payment-screen { text-align: center; }
+        .price-tag { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
+        .lock-icon { font-size: 4rem; color: #cbd5e1; margin-bottom: 20px; }
+
+        /* Existing styles for buttons, questions, etc... */
+        .btn-next { background: var(--primary); color: white; padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        /* ... rest of your CSS ... */
+    </style>
+</head>
+<body>
+
+    <div id="payment-screen" class="exam-card">
+        <div class="lock-icon">🔒</div>
+        <h1>Premium Mock Exam 1</h1>
+        <p>This is a premium high-yield exam. Pay once and get lifetime access.</p>
+        <div class="price-tag">$5.00 USD</div>
+        <div id="paypal-button-container"></div>
+        <button class="btn-prev" onclick="history.back()" style="margin-top: 20px; background: none; color: #64748b; border: none; cursor: pointer;">Go Back</button>
+    </div>
+
+    <div id="start-screen" class="exam-card hidden" style="text-align: center;">
+        <h1>HAAD-DOH Mock Exam 1</h1>
+        <p>50 Questions | 40 Minutes</p>
+        <button class="btn-next" onclick="startExam()">Start Exam Now</button>
+    </div>
+
+    <div id="exam-screen" class="exam-card hidden">
+        </div>
+
+    <div id="results-screen" class="exam-card hidden">
+        </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4kGcT5L6p1B1aD2WAeo0OCXin1If8B_o",
+            authDomain: "gulfmedicalexamz.firebaseapp.com",
+            projectId: "gulfmedicalexamz",
+            storageBucket: "gulfmedicalexamz.firebasestorage.app",
+            messagingSenderId: "23161933734",
+            appId: "1:23161933734:web:06b63e4853387efc174967"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                // Not logged in? Redirect to login
+                window.location.href = "index.html";
+                return;
+            }
+
+            // Check if user already paid for EXAM 1
+            const paymentRef = doc(db, "users", user.uid, "payments", "exam1");
+            const paymentSnap = await getDoc(paymentRef);
+
+            if (paymentSnap.exists()) {
+                showStartScreen();
+            } else {
+                initPayPal(user.uid);
+            }
+        });
+
+        function showStartScreen() {
+            document.getElementById('payment-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+
+        function initPayPal(uid) {
+            paypal.Buttons({
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: { value: '5.00' },
+                            description: "HAAD-DOH Premium Exam 1"
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then(async (details) => {
+                        // SUCCESS! Save to Firestore
+                        await setDoc(doc(db, "users", uid, "payments", "exam1"), {
+                            paid: true,
+                            email: details.payer.email_address,
+                            date: new Date().toISOString()
+                        });
+                        showStartScreen();
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // --- ALL YOUR ORIGINAL EXAM JAVASCRIPT LOGIC BELOW ---
+        // (startExam, nextQuestion, renderQuestion, etc.)
+        // Ensure all your variables (questions array, etc.) are inside or accessible here.
+    </script>
+</body>
+</html>
