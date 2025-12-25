@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAAD-DOH Exam 8 - Premium | Gulf Medical Exams</title>
+    
+    <script>
+        (function() {
+            const isUnlocked = localStorage.getItem('premium_unlocked') === 'true';
+            if (!isUnlocked) {
+                alert("This is a Premium Exam. Redirecting to payment page...");
+                window.location.href = "haad-doh.html"; // Redirect back to list
+            }
+        })();
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Keep your existing CSS here */
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+        }
+        /* ... (rest of your existing CSS) ... */
+        
+        /* New Style for Premium Notice */
+        .premium-tag {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen" class="exam-card" style="text-align: center;">
+        <div class="premium-tag">PREMIUM CONTENT UNLOCKED</div>
+        <h1>HAAD-DOH Mock Exam 8</h1>
+        <p>50 Questions | 40 Minutes</p>
+        <button class="btn-next" onclick="startExam()">Start Exam Now</button>
+        <p style="margin-top:20px; font-size: 0.8rem; color: var(--secondary);">Verified Payment: hbo8097@gmail.com</p>
+    </div>
+
+    <script>
+        // Your existing JS logic (questions array, timer, renderQuestion, etc.)
+        // Ensure the 'questions' array for Exam 8 is pasted here.
+        // ...
+    </script>
+</body>
+</html>
