@@ -23,35 +23,27 @@
 </div>
 
 <script>
-    async function shorten() {
-        const longUrl = document.getElementById('longUrl').value;
-        const resultDiv = document.getElementById('result');
-        const token = "gIoWJSS9BTkCFHrywAprVqWOk85zeyRA47483Dq9mWcVcIFhym4YSxKkdFlw"; // <--- PASTE YOUR TINYURL TOKEN HERE
+async function shorten() {
+    const longUrl = document.getElementById('longUrl').value;
+    const resultDiv = document.getElementById('result');
 
-        if (!longUrl) { alert("Please paste a URL!"); return; }
+    if (!longUrl) { alert("Please paste a URL!"); return; }
+    resultDiv.innerText = "Shortening...";
 
-        resultDiv.innerText = "Shortening...";
+    try {
+        // Using Is.gd which is free and doesn't require a private token
+        const response = await fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`);
+        const data = await response.json();
 
-        try {
-            const response = await fetch('https://api.tinyurl.com/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ url: longUrl, domain: "tinyurl.com" })
-            });
-
-            const data = await response.json();
-            if (data.data && data.data.tiny_url) {
-                resultDiv.innerHTML = `Short Link: <a href="${data.data.tiny_url}" target="_blank">${data.data.tiny_url}</a>`;
-            } else {
-                resultDiv.innerText = "Error: Could not shorten link.";
-            }
-        } catch (error) {
-            resultDiv.innerText = "Connection Error!";
+        if (data.shorturl) {
+            resultDiv.innerHTML = `Short Link: <a href="${data.shorturl}" target="_blank">${data.shorturl}</a>`;
+        } else {
+            resultDiv.innerText = "Error: " + data.errormessage;
         }
+    } catch (error) {
+        resultDiv.innerText = "Connection Error! Try again.";
     }
+}
 </script>
 
 </body>
