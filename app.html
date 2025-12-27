@@ -3,63 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Link Shortener</title>
-    <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; width: 350px; }
-        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
-        button { background: #007bff; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        #result { margin-top: 20px; word-break: break-all; font-weight: bold; color: #28a745; }
-    </style>
+    <title>QuickLink | URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center text-blue-600">QuickLink</h1>
+        <div class="flex flex-col gap-4">
+            <input type="url" id="longUrl" placeholder="Paste your long link here..." 
+                   class="border p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button onclick="shortenUrl()" 
+                    class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                Shorten URL
+            </button>
+        </div>
+        <div id="result" class="mt-6 hidden border-t pt-4">
+            <p class="text-sm text-gray-600">Your short link:</p>
+            <div class="flex items-center gap-2 mt-1">
+                <input type="text" id="shortUrl" readonly class="bg-gray-50 p-2 rounded w-full text-blue-500">
+                <button onclick="copyLink()" class="text-xs bg-gray-200 px-2 py-1 rounded">Copy</button>
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-    <h2>Link Shortener</h2>
-    <input type="url" id="longUrl" placeholder="Paste your long link here..." required>
-    <button onclick="shorten()">Shorten Now</button>
-    <div id="result"></div>
-</div>
+    <script>
+        async function shortenUrl() {
+            const longUrl = document.getElementById('longUrl').value;
+            if(!longUrl) return alert("Please enter a URL");
 
-<script>
-async function shorten() {
-    const longUrl = document.getElementById('longUrl').value;
-    const resultDiv = document.getElementById('result');
-
-    if (!longUrl) { alert("Please paste a URL!"); return; }
-    resultDiv.innerText = "Connecting to server...";
-
-    try {
-        // This proxy tells the browser it's safe to talk to is.gd
-        const proxyUrl = "https://corsproxy.io/?";
-        const apiUrl = `https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`;
-        
-        const response = await fetch(proxyUrl + apiUrl);
-        const data = await response.json();
-
-        if (data.shorturl) {
-            resultDiv.innerHTML = `
-                <p>Success! Your short link:</p>
-                <a href="${data.shorturl}" target="_blank" id="finalLink">${data.shorturl}</a>
-                <br><br>
-                <button onclick="copyToClipboard('${data.shorturl}')" style="background:#28a745; width:auto; padding:8px 15px;">Copy Link</button>
-            `;
-        } else {
-            resultDiv.innerText = "API Error: " + (data.errormessage || "Could not shorten.");
+            // In a real app, replace 'http://localhost:3000' with your actual domain
+            const response = await fetch('http://localhost:3000/shorten', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ longUrl })
+            });
+            const data = await response.json();
+            
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('shortUrl').value = data.shortUrl;
         }
-    } catch (error) {
-        console.error("CORS Error details:", error);
-        resultDiv.innerText = "Connection failed. The API might be blocking the request.";
-    }
-}
 
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert("Link copied!");
-    });
-}
-</script>
-
+        function copyLink() {
+            const copyText = document.getElementById("shortUrl");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied to clipboard!");
+        }
+    </script>
 </body>
 </html>
