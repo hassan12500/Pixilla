@@ -73,7 +73,6 @@
     }
     nav a:hover { color: var(--primary); }
 
-    /* Language Switcher Style */
     .lang-select {
       padding: 6px 10px;
       border-radius: 8px;
@@ -237,7 +236,7 @@
 
     <a href="#" data-i18n="nav-exams">Exams</a>
     <a href="#" data-i18n="nav-resources">Resources</a>
-    <a href="#" data-i18n="nav-jobs">Jobs</a>
+    <a href="jobs.html" target="_blank" data-i18n="nav-jobs">Jobs</a>
 
     <div class="user-container">
         <button class="login-btn" id="loginBtn" onclick="handleLogin()" data-i18n="login">Login</button>
@@ -338,7 +337,6 @@
       const key = el.getAttribute('data-i18n');
       if(langData[lang][key]) el.innerText = langData[lang][key];
     });
-    // Set Right-to-Left for Arabic and Urdu
     document.getElementById('body').className = (lang === 'ar' || lang === 'ur') ? 'rtl' : '';
   };
 
@@ -379,13 +377,20 @@
     });
   };
 
+  // --- Updated Logic for Jobs ---
   window.requireLogin = (action) => {
     if (!auth.currentUser && action !== 'Jobs') {
       alert("Please login to access " + action);
       handleLogin();
     } else {
-      if (action === "Explore Exams") window.location.href = "exploreexams.html";
-      else if (action !== 'Jobs') alert(action + " coming soon!");
+      if (action === "Explore Exams") {
+          window.location.href = "exploreexams.html";
+      } else if (action === 'Jobs') {
+          // Opens jobs.html in a new tab
+          window.open("jobs.html", "_blank");
+      } else {
+          alert(action + " coming soon!");
+      }
     }
   };
 </script>
